@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "web-llm-wrappers",
   "private": true,
   "scripts": {
     "build": "turbo run build",
