@@ -1,0 +1,61 @@
+{
+  "name": "@web-llm-wrappers/react",
+  "version": "0.0.1",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./run": "./dist/run.mjs",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsdown --watch",
+    "build": "tsdown"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@mlc-ai/web-llm": "^0.2.79"
+  },
+  "dependencies": {
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.5",
+    "tsdown": "^0.16.6",
+    "typescript": "^5.9.3"
+  },
+  "tsdown": {
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": {
+      "resolve": true,
+      "entry": [
+        "./src/index.ts"
+      ],
+      "compilerOptions": {
+        "moduleResolution": "node"
+      }
+    },
+    "sourcemap": true,
+    "clean": true,
+    "target": "es6"
+  }
+}
