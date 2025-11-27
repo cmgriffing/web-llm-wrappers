@@ -3,5 +3,6 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "ninetyfive.indexingEnabled": "on"
 }
