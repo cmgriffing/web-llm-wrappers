@@ -1,6 +1,6 @@
 import type { ChatOptions, InitProgressReport, MLCEngineConfig } from '@mlc-ai/web-llm';
 import { CreateMLCEngine, prebuiltAppConfig, MLCEngine } from '@mlc-ai/web-llm';
-import { readable, get, writable } from 'svelte/store';
+import { readable, get, writable, derived } from 'svelte/store';
 import { onMount, onDestroy } from 'svelte';
 
 function getAvailableModels() {
@@ -64,16 +64,8 @@ export function useWebLLM({
 	});
 
 	return {
-		engine: readable(get(writableEngine), (set) => {
-			return writableEngine.subscribe((newEngine) => {
-				set(newEngine);
-			});
-		}),
-		progressReport: readable(get(writableProgressReport), (set) => {
-			return writableProgressReport.subscribe((newProgressReport) => {
-				set(newProgressReport);
-			});
-		}),
+		engine: derived(writableEngine, (engine) => engine),
+		progressReport: derived(writableProgressReport, (progressReport) => progressReport),
 		getAvailableModels,
 		loadModel
 	};
