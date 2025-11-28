@@ -61,7 +61,7 @@ function sendMessage() {
   chatHistory.value = newHistory;
   newMessage.value = "";
 
-  engine.chat.completions
+  engine.value?.chat.completions
     .create({
       stream: true,
       messages: newHistory,
@@ -70,7 +70,7 @@ function sendMessage() {
     .then(async (stream) => {
       let assistantMessage = "";
       for await (const chunk of stream) {
-        assistantMessage += chunk.choices[0].delta.content || "";
+        assistantMessage += chunk.choices[0]?.delta.content || "";
 
         chatHistory.value = [
           ...newHistory,
@@ -103,7 +103,7 @@ function sendMessage() {
     <Button id="download" @click="downloadModel">Download</Button>
   </div>
   <p id="download-status" v-if="progressReport">
-    {{ progressReport.text }}
+    {{ progressReport.value.text }}
   </p>
 
   <p>Step 2: Chat</p>
@@ -111,7 +111,7 @@ function sendMessage() {
     <div id="chat-box" className="chat-box flex flex-col">
       <div
         v-for="(msg, index) in chatHistory"
-        :key="{ index }"
+        :key="index"
         :class="`chat-message ${messageStyles[msg.role]}`"
       >
         <span>{{ msg.content }}</span>
