@@ -1,0 +1,38 @@
+<main class="main">
+  <p>Step 1: Initialize WebLLM and Download Model</p>
+  <div class="download-container">
+    <brn-select class="inline-block" placeholder="Select an option" [(ngModel)]="selectedModel">
+      <hlm-select-trigger class="w-screen">
+        <hlm-select-value />
+      </hlm-select-trigger>
+      <hlm-select-content class="w-screen">
+        <hlm-option *ngFor="let model of availableModels" [value]="model.model_id">
+          {{ model.model_id }}
+        </hlm-option>
+      </hlm-select-content>
+    </brn-select>
+    <button hlmBtn id="download" (click)="downloadModel()">Download</button>
+  </div>
+  <p id="download-status" *ngIf="progressReport?.text">{{ progressReport?.text }}</p>
+
+  <p>Step 2: Chat</p>
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box">
+      <div *ngFor="let message of chatHistory" [class]="messageStyles[message.role]">
+        <span>{{ message.content }}</span>
+      </div>
+    </div>
+    <div id="chat-stats" class="chat-stats hidden"></div>
+    <form class="chat-input-container" (ngSubmit)="sendMessage($event)">
+      <input
+        hlmInput
+        type="text"
+        id="user-input"
+        name="user-input"
+        placeholder="Type a message..."
+        [(ngModel)]="newMessage"
+      />
+      <button hlmBtn id="send" [disabled]="!modelLoaded" type="submit">Send</button>
+    </form>
+  </div>
+</main>

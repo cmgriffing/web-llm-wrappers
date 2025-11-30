@@ -1,0 +1,46 @@
+{
+  "name": "@web-llm-wrappers/angular",
+  "version": "0.0.1",
+  "type": "module",
+  "module": "./build/fesm2022/web-llm-wrappers-angular.mjs",
+  "types": "./build/types/web-llm-wrappers-angular.d.ts",
+  "scripts": {
+    "build": "pnpm build:transpile",
+    "build:transpile": "ng build --configuration production",
+    "build:dev": "pnpm build",
+    "build:watch": "pnpm build:transpile:watch",
+    "build:dev:watch": "pnpm build:watch",
+    "build:transpile:watch": "ng build --configuration production --watch",
+    "build:tarball": "pnpm pack ./build"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "peerDependencies": {
+    "@angular/common": ">=14.x  <= 21.x",
+    "@angular/compiler": ">=14.x <= 21.x",
+    "@angular/core": ">=14.x <= 21.x",
+    "@angular/platform-browser": ">=14.x <= 21.x",
+    "@mlc-ai/web-llm": "^0.2.80",
+    "rxjs": ">=6.6.7",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.0.1",
+    "@angular/build": "^21.0.1",
+    "@angular/cli": "^21.0.1",
+    "@angular/compiler-cli": "^21.0.0",
+    "ng-packagr": "^21.0.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

@@ -1,0 +1,24 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+// This tsconfig is used when building @sentry/angular with the Angular
+// compiler and `ng-packagr`. It configures a production build conforming
+// to the Angular Package Format (APF).
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "declarationMap": false,
+    "lib": ["DOM", "es2020"],
+    "baseUrl": "./"
+  },
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "enableI18nLegacyMessageIdFormat": false,
+
+    "compilationMode": "partial"
+  }
+}
