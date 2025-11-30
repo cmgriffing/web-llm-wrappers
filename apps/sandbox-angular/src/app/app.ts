@@ -1,13 +1,5 @@
-import {
-  ApplicationRef,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterOutlet } from '@angular/router';
 import { InitProgressReport, MLCEngine } from '@mlc-ai/web-llm';
 import { WebLLMService } from '@web-llm-wrappers/angular';
 
@@ -68,13 +60,11 @@ export class App {
     this.availableModels = this.webLLMService.getAvailableModels();
 
     this.webLLMService.engine.pipe(takeUntilDestroyed()).subscribe((engine) => {
-      console.log('updating engine', engine);
       this.engine = engine;
       this.cd.detectChanges();
     });
 
     this.webLLMService.progressReport.pipe(takeUntilDestroyed()).subscribe((progressReport) => {
-      console.log('updating progressReport', progressReport);
       this.progressReport = progressReport;
       this.cd.detectChanges();
     });
@@ -85,7 +75,6 @@ export class App {
   }
 
   async downloadModel() {
-    console.log('downloading model', this.selectedModel);
     if (this.selectedModel) {
       await this.webLLMService.loadModel(this.selectedModel);
       this.modelLoaded = true;
@@ -95,11 +84,8 @@ export class App {
   sendMessage(e: Event) {
     e.preventDefault();
     if (this.newMessage.trim() === '' || !this.engine || !this.modelLoaded) {
-      console.log('No message to send or model not loaded');
       return;
     }
-
-    console.log('Sending message', this.newMessage);
 
     const newHistory = [...this.chatHistory, { content: this.newMessage, role: 'user' } as const];
     this.chatHistory = newHistory;
@@ -112,12 +98,9 @@ export class App {
         temperature: 0,
       })
       .then(async (stream) => {
-        console.log('Stream received', stream);
         let assistantMessage = '';
         for await (const chunk of stream) {
           assistantMessage += chunk.choices[0].delta.content || '';
-
-          console.log('assistantMessage', assistantMessage);
 
           this.chatHistory = [
             ...newHistory,
