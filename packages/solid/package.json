@@ -1,12 +1,31 @@
 {
-  "name": "solid",
-  "version": "1.0.0",
+  "name": "@web-llm-wrappers/solid",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./run": "./dist/run.mjs",
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsdown --watch",
+    "build": "tsdown"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tsdown": "^0.16.6"
+  },
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.80",
+    "solid-js": "^1.9.10"
+  }
 }
