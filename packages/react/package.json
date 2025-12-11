@@ -1,6 +1,6 @@
 {
   "name": "@web-llm-wrappers/react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "files": [
     "dist"
@@ -30,12 +30,12 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
+    "react": ">= 18.0",
     "@mlc-ai/web-llm": "^0.2.79"
   },
-  "dependencies": {
-    "react": "^19.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "react": "^19.2.0",
     "@types/react": "^19.2.5",
     "tsdown": "^0.16.6",
     "typescript": "^5.9.3"
