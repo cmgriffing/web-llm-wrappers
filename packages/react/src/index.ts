@@ -51,13 +51,24 @@ export function useWebLLM({
 
   useEffect(() => {
     if (singleton) {
-      setEngine(singletons.engine);
+      if (engineConfig?.appConfig) {
+        singletons.engine.setAppConfig(engineConfig.appConfig);
+      }
+      if (engineConfig?.logitProcessorRegistry) {
+        singletons.engine.setLogitProcessorRegistry(
+          engineConfig?.logitProcessorRegistry
+        );
+      }
+
       singletons.engine.setInitProgressCallback((progressReport) => {
         setProgressReport(progressReport);
+        engineConfig?.initProgressCallback?.(progressReport);
+
         if (debug) {
           console.log("DEBUG: WebLLM React:", { progressReport });
         }
       });
+      setEngine(singletons.engine);
     } else if (modelId) {
       CreateMLCEngine(modelId, engineConfig, chatOptions).then((engine) => {
         setEngine(engine);
@@ -79,7 +90,9 @@ export function useWebLLM({
     }
 
     return () => {
-      engine?.unload();
+      if (!singleton) {
+        engine?.unload();
+      }
       setEngine(null);
     };
   }, [engineConfig, debug, singleton]);
